@@ -3,16 +3,17 @@ import Slider from "react-slick";
 
 import { useEffect, useMemo } from "react";
 import { useState } from "react";
+import HomeLink from "../components/HomeLink";
 
 const Home = () => {
   const [time, setTime] = useState(new Date());
   const [words, setWords] = useState([
     {
       text: "거기에 많은 시간을 들였다는 이유만으로 실수에 집착하지 마세요",
-      author: "unknown",
+      author: "익명",
     },
-    { text: "처음부터 잘하면 외계인", author: "unknown" },
-    { text: "일 완벽하게 하려고 스트레스 받지 말자", author: "unknown" },
+    { text: "처음부터 잘하면 외계인", author: "익명" },
+    { text: "일 완벽하게 하려고 스트레스 받지 말자", author: "익명" },
   ]);
   const [imglist, setImglist] = useState([
     // 슬릭에 출력할 배경이미지 배열
@@ -61,7 +62,7 @@ const Home = () => {
   };
 
   return (
-    <Wrap>
+    <div>
       <StyledSlider {...settings}>
         {/** 슬라이더는 내용이 커지면 다음 페이지에 넘어간다. 크기를 조절해서 사용 */}
         {
@@ -84,22 +85,20 @@ const Home = () => {
         <p>{printWord.text}</p>
         <p>- {printWord.author}</p>
       </ClockWrap>
-    </Wrap>
+      <HomeLink />
+    </div>
   );
 };
 
 export default Home;
 
-const Wrap = styled.div`
-  position: relative;
-`;
-
 const ClockWrap = styled.div`
-  position: absolute;
-  top: 10%;
+  position: fixed;
+  top: 50%;
   left: 5%;
   z-index: 2;
   color: whitesmoke;
+  transform: translateY(-50%);
   h1 {
     margin-bottom: 1.5rem;
   }
@@ -111,19 +110,20 @@ const StyledSlider = styled(Slider)`
   }
   img {
     width: 100%;
-    height: 400px;
+    height: 100vh;
     object-fit: cover;
   }
   &::before {
     content: "";
     display: inline-block;
     width: 100%;
-    height: 400px;
+    height: 100vh;
     background-color: rgb(0, 0, 0, 0.5);
     position: absolute;
     z-index: 1;
   }
   &.slick-initialized {
     overflow: hidden;
+    height: 100vh;
   }
 `;
