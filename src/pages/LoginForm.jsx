@@ -14,8 +14,13 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../modules/currentUser";
 
 const LoginForm = () => {
+  // 리덕스의 리듀서를 사용하기위한 디스패치
+  const dispatch = useDispatch();
+
   // 페이지를 이동하기 위한 navigate();
   const navigate = useNavigate();
 
@@ -33,6 +38,7 @@ const LoginForm = () => {
         const user = userCredential.user;
         // ..
         console.log(user);
+        dispatch(userLogin(user));
         alert("회원가입이 완료되었습니다.");
       })
       .catch((error) => {
@@ -58,6 +64,7 @@ const LoginForm = () => {
         const user = userCredential.user;
         // ...
         console.log(user);
+        dispatch(userLogin(user));
         navigate("/");
       })
       .catch((error) => {
@@ -68,6 +75,8 @@ const LoginForm = () => {
           alert("잘못된 비밀번호입니다.");
         } else if (errorCode == "auth/user-not-fount") {
           alert("없는 이메일입니다.");
+        } else if (errorCode == "auth/invalid-email") {
+          alert("이메일을 입력해주세요");
         } // 동시에 출력되는 경우도 있음
       });
   };
@@ -93,6 +102,7 @@ const LoginForm = () => {
         const user = result.user;
         // ...
         console.log(user);
+        dispatch(userLogin(user));
         navigate("/");
       })
       .catch((error) => {
@@ -157,13 +167,29 @@ const Wrap = styled.div`
   height: 100vh;
   display: flex;
   padding: 2rem;
-  h1 {
-    margin-bottom: 1rem;
-  }
   form {
     margin: auto;
     width: 300px;
   }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  .login-with {
+    margin-top: 1rem;
+    color: #acafb1;
+  }
+
+  // mui input style
+  .css-19mk8g1-MuiInputBase-root-MuiFilledInput-root:after {
+    border-bottom: 2px solid #212529;
+  }
+  label {
+    &.Mui-focused {
+      color: #212529;
+    }
+  }
+
+  // mui button style
   button {
     color: #f8f9fa;
     background-color: #212529;
@@ -174,9 +200,5 @@ const Wrap = styled.div`
       font-size: 1rem;
       margin-right: 0.5rem;
     }
-  }
-  .login-with {
-    margin-top: 1rem;
-    color: #acafb1;
   }
 `;

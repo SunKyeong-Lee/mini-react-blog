@@ -14,13 +14,24 @@ import GlobalStyle from "./styles/GlobalStyle";
 // : 전체 파일에 그 내용이 실행 적용 (어디에서 한 곳에 들고와도)
 import "./database/firebase";
 
+// 리덕스를 사용하기위해서 리덕스 프로바이더 추가
+import { Provider } from "react-redux";
+// createStore를 추가
+import { createStore } from "redux";
+import rootReducer from "./modules/store";
+
+// createStore를 통해서 store 생성
+const store = createStore(rootReducer);
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-      <GlobalStyle />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+        <GlobalStyle />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
