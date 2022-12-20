@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import LoginForm from "./pages/LoginForm";
+import Guest from "./pages/Guest";
 
 // Routes와 Route를 이용하면 화면 관리
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/loginform" element={<LoginForm />} />
+        <Route path="/guest" element={<Guest />} />
       </Routes>
     </div>
   );
