@@ -16,12 +16,12 @@
 // 초기값
 // 로그인 여부를 알아보기 위해 초기값을 null
 // 안에 [], {}을 넣어두면 값이 있다고 판단
-const initalState = null;
+const initialState = null;
 // 다른 방법으로 데이터 관리
 // { userinfo : null, login: false } 와 같이 객체 안에 속성으로 추가해서 사용
 
 // 리듀서 - switch문으로 작성
-function currentUser(state = initalState, action) {
+function currentUser(state = initialState, action) {
   switch (action.type) {
     // 비동기의 내용은 컴포넌트에서 실행한 후, 리덕스로 들고옴
     // * 비동기를 미들웨어(thunk)를 이용하여 진행할 수 있다.
