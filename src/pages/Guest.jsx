@@ -12,6 +12,8 @@ const Guest = () => {
   // 리덕스를 이용하여 guest의 값 가져오기
   const guestList = useSelector((state) => state.guest);
   const dispatch = useDispatch();
+  // 이메일정보를 들고오기위해 리덕스의 currentUser 들고오기
+  const currentUser = useSelector((state) => state.currentUser);
 
   const [name, setName] = useState("익명");
   const [text, setText] = useState("");
@@ -36,13 +38,25 @@ const Guest = () => {
       <h3>글을 쓰는 공간</h3>
       <StyledForm onSubmit={onsubmit}>
         <Stack spacing={2}>
-          <TextField
-            label="이름"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
+          {currentUser ? (
+            // 로그인 되었을 때
+            <TextField
+              label="이름"
+              value={currentUser.email}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          ) : (
+            // 로그인 되지않았을 때
+            <TextField
+              label="이름"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+          )}
           <TextField
             label="작성할 내용"
             multiline
