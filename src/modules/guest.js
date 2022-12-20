@@ -13,8 +13,8 @@ const getDate = () => {
 
 // 초기값
 const initialState = [
-  { guestId: 1, name: "바닐라라떼팡인", text: "들렸다갑니다.", date: "2022.12.20" },
   { guestId: 2, name: "익명", text: "블로그 잘 봤습니다.", date: "2022.12.18" },
+  { guestId: 1, name: "바닐라라떼팡인", text: "들렸다갑니다.", date: "2022.12.20" },
 ];
 
 // 리듀서
@@ -29,8 +29,6 @@ function guest(state = initialState, action) {
       const newGuestArray = state.concat(newGuest);
       return newGuestArray;
 
-    case "":
-      return;
     default:
       return state;
   }

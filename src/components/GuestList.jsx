@@ -22,8 +22,9 @@ const GuestList = (props) => {
 export default GuestList;
 
 const StyledCard = styled(Card)`
+  white-space: pre-wrap;
   .MuiTypography-h5 {
     font-size: 1rem;
     font-weight: bold;
   }
-`
+`;

@@ -74,7 +74,7 @@ const Guest = () => {
       <hr />
       <h3>글 쓴 내용이 출력되는 공간</h3>
       <CartList>
-        {guestList.map((guest) => (
+        {guestList.slice(0).reverse().map((guest) => (
           <GuestList key={guest.guestId} guest={guest} />
         ))}
       </CartList>
