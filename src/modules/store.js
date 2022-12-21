@@ -3,7 +3,8 @@ import { combineReducers } from "redux";
 // 리덕스 모듈 연결
 import currentUser from "./currentUser";
 import guest from "./guest";
+import board from "./board";
 
-const rootReducer = combineReducers({ currentUser, guest });
+const rootReducer = combineReducers({ currentUser, guest, board });
 
 export default rootReducer;

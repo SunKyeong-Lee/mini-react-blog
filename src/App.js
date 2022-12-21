@@ -5,6 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import Home from './pages/Home';
 import LoginForm from "./pages/LoginForm";
 import Guest from "./pages/Guest";
+import Board from "./pages/Board";
+import BoardPage from "./pages/BoardPage";
+import BoardWriteForm from "./pages/BoardWriteForm";
 
 // Routes와 Route를 이용하면 화면 관리
 function App() {
@@ -15,9 +18,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/loginform" element={<LoginForm />} />
         <Route path="/guest" element={<Guest />} />
+        <Route path="/board" element={<Board />} />
+        <Route path="/board/:id" element={<BoardPage />} />
+        <Route path="/board/modifyform" element={<BoardWriteForm />} />
       </Routes>
     </div>
   );
 }
+
+// 404 페이지 만들기
 
 export default App;

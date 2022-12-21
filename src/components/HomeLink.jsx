@@ -15,7 +15,7 @@ const HomeLink = () => {
       {user ? (
         //로그인이 되었을 때 보이는 화면, 단 관리자페이지는 홈페이지 주인만 보이기
         <div>
-          <Link>게시글</Link>
+          <Link to="/board">게시글</Link>
           <Link to="/guest">방명록</Link>
           <Link>관리자 페이지</Link>
           <Link>마이페이지</Link>
@@ -24,7 +24,7 @@ const HomeLink = () => {
       ) : (
         //로그인이 되어있지 않을 때, 보여지는 링크
         <div>
-          <Link>게시글</Link>
+          <Link to="/board">게시글</Link>
           <Link to="/guest">방명록</Link>
           <Link to="/loginform">로그인</Link>
         </div>
