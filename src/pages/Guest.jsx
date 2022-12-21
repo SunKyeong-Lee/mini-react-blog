@@ -3,10 +3,11 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addGuest } from "../modules/guest";
 import GuestList from "../components/GuestList";
+import { useNavigate } from "react-router-dom";
 
 const Guest = () => {
   // 리덕스를 이용하여 guest의 값 가져오기
@@ -18,24 +19,27 @@ const Guest = () => {
   const [name, setName] = useState("익명");
   const [text, setText] = useState("");
 
+  const navigate = useNavigate();
+  const inputRef = useRef();
+
   const onsubmit = (e) => {
     e.preventDefault();
     if (text == "") {
       alert("내용을 작성해주세요");
       return;
     }
-    // 스페이스바만 눌렀을 때도 추가
     dispatch(
       addGuest({
         name: name,
         text: text,
       })
     );
+    inputRef.current.value = "";
   };
 
   return (
     <Wrap>
-      <h3>글을 쓰는 공간</h3>
+      <h2>GuestBook</h2>
       <StyledForm onSubmit={onsubmit}>
         <Stack spacing={2}>
           {currentUser ? (
@@ -60,24 +64,38 @@ const Guest = () => {
           <TextField
             label="작성할 내용"
             multiline
+            inputRef={inputRef}
             rows={4}
             onChange={(e) => {
               setText(e.target.value);
             }}
           />
           {/** 버튼을 클릭했을 때, 리듀서에 내용을 추가 */}
-          <Button variant="contained" type="submit">
-            작성
-          </Button>
+          <div className="button-wrap">
+            <Button
+              variant="contained"
+              color="inherit"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              홈으로 가기
+            </Button>
+            <Button variant="contained" type="submit">
+              방명록 작성
+            </Button>
+          </div>
         </Stack>
       </StyledForm>
       <hr />
-      <h3>글 쓴 내용이 출력되는 공간</h3>
-      <CartList>
-        {guestList.slice(0).reverse().map((guest) => (
-          <GuestList key={guest.guestId} guest={guest} />
-        ))}
-      </CartList>
+      <CardList>
+        {guestList
+          .slice(0)
+          .reverse()
+          .map((guest) => (
+            <GuestList key={guest.guestId} guest={guest} />
+          ))}
+      </CardList>
     </Wrap>
   );
 };
@@ -94,8 +112,15 @@ const Wrap = styled.div`
 
 const StyledForm = styled.form`
   margin: 2rem 0;
+  .button-wrap {
+    display: flex;
+    margin-left: auto;
+    button {
+      margin-left: 1rem;
+    }
+  }
 `;
 
-const CartList = styled.div`
+const CardList = styled.div`
   margin: 2rem 0;
 `;
