@@ -1,40 +1,41 @@
-import { Card, CardContent, Typography } from "@mui/material";
 import styled from "styled-components";
 
 const GuestList = (props) => {
   const { guest } = props;
 
   return (
-    <Card variant="outlined" sx={{ mb: 2 }}>
-      <StyledCardContent>
-        <div>
-          <div className="name">{guest.name}</div>
-          <div className="date">{guest.date}</div>
-        </div>
-        <div>{guest.text}</div>
-      </StyledCardContent>
-    </Card>
+    <MyContainer>
+      <div>
+        <div className="name">{guest.name}</div>
+        <div className="date">{guest.date}</div>
+      </div>
+      <div>{guest.text}</div>
+    </MyContainer>
   );
 };
 
 export default GuestList;
 
-const StyledCardContent = styled(CardContent)`
+const MyContainer = styled.div`
   white-space: pre-wrap;
   display: flex;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid lightgray;
+  &:first-child {
+    padding-top: 0;
+  }
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
   > div {
     &:first-child {
-      padding-right: 1rem;
-      border-right: 1px dashed lightgray;
+      padding-right: 3rem;
       flex: 1;
     }
     &:last-child {
-      padding-left: 1rem;
       flex: 4;
     }
-  }
-  .css-46bh2p-MuiCardContent-root:last-child {
-    padding: 0;
   }
   .name {
     font-weight: bold;

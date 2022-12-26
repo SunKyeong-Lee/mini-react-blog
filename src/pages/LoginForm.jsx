@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import { TextField } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
+import MyButton from "../styles/MyButton";
+import MyInput from "../styles/MyInput";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -123,7 +123,7 @@ const LoginForm = () => {
       <form onSubmit={onsubmit}>
         <Stack direction="column" spacing={2}>
           <h1>Login</h1>
-          <TextField
+          <MyInput
             label="e-mail"
             variant="filled"
             size="small"
@@ -132,7 +132,7 @@ const LoginForm = () => {
               setEmail(e.target.value);
             }}
           />
-          <TextField
+          <MyInput
             label="password"
             variant="filled"
             size="small"
@@ -143,17 +143,17 @@ const LoginForm = () => {
           />
         </Stack>
         <Stack direction="column" spacing={1} sx={{ mt: 5 }}>
-          <Button type="submit" size="large">
+          <MyButton variant="contained" type="submit" size="large">
             로그인
-          </Button>
-          <Button size="large" onClick={emailCreate}>
+          </MyButton>
+          <MyButton variant="contained" size="large" onClick={emailCreate}>
             위 이메일과 비밀번호로 회원가입
-          </Button>
+          </MyButton>
           <div className="login-with">or login with</div>
-          <Button size="large" onClick={gooleLogin}>
+          <MyButton size="large" onClick={gooleLogin}>
             <GoogleIcon />
             구글 로그인
-          </Button>
+          </MyButton>
         </Stack>
       </form>
     </Wrap>
@@ -177,28 +177,5 @@ const Wrap = styled.div`
   .login-with {
     margin-top: 1rem;
     color: #acafb1;
-  }
-
-  // mui input style
-  .css-19mk8g1-MuiInputBase-root-MuiFilledInput-root:after {
-    border-bottom: 2px solid #212529;
-  }
-  label {
-    &.Mui-focused {
-      color: #212529;
-    }
-  }
-
-  // mui button style
-  button {
-    color: #f8f9fa;
-    background-color: #212529;
-    &:hover {
-      background-color: black;
-    }
-    svg {
-      font-size: 1rem;
-      margin-right: 0.5rem;
-    }
   }
 `;

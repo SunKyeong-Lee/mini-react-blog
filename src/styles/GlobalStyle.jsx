@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
   html, body {
     height: 100%;
+    background-color: #ccccd3;
   }
 
   // 푸터 하단 고정
