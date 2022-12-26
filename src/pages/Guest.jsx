@@ -21,7 +21,7 @@ const Guest = () => {
   const [text, setText] = useState("");
 
   const navigate = useNavigate();
-  const inputRef = useRef();
+  const contentRef = useRef();
 
   const onsubmit = (e) => {
     e.preventDefault();
@@ -35,7 +35,8 @@ const Guest = () => {
         text: text,
       })
     );
-    inputRef.current.value = "";
+    contentRef.current.value = null;
+    setName("익명");
   };
 
   return (
@@ -66,7 +67,7 @@ const Guest = () => {
             <TextField
               label="작성할 내용"
               multiline
-              inputRef={inputRef}
+              inputRef={contentRef}
               rows={4}
               onChange={(e) => {
                 setText(e.target.value);
