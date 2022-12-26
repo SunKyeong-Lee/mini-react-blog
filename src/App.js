@@ -8,6 +8,7 @@ import Guest from "./pages/Guest";
 import Board from "./pages/Board";
 import BoardPage from "./pages/BoardPage";
 import BoardWriteForm from "./pages/BoardWriteForm";
+import BoardAddForm from "./pages/BoardAddForm";
 
 // Routes와 Route를 이용하면 화면 관리
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/board" element={<Board />} />
         <Route path="/board/:id" element={<BoardPage />} />
         <Route path="/board/modifyform" element={<BoardWriteForm />} />
+        <Route path="/board/writeform" element={<BoardAddForm />} />
       </Routes>
     </div>
   );

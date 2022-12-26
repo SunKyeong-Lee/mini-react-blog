@@ -54,7 +54,6 @@ const Wrap = styled.div`
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  background-color: #ccccd3;
   .MuiGrid-item {
     padding: 1rem;
   }

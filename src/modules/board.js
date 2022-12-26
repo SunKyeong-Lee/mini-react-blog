@@ -32,6 +32,7 @@ function board(state = initialState, action) {
         (item) => item.boardId != action.payload
       );
       return newBoardList;
+
     // 수정된 board값을 들고와서, 그 값을 통채로 리스트에 바꿔서 넣어줌
     // 배열의 갯수가 바뀌지 않고, 그 안에 값만 수정 : map
     // 수정할 id 값을 비교해서, board
@@ -40,6 +41,28 @@ function board(state = initialState, action) {
         item.boardId == action.payload.boardId ? action.payload : board
       );
       return modifyBoard;
+
+    // 새로운 board값을 받아와서, boardId를 부여한 후에 추가
+    // action.payload를 통해서 - userEmail, title, content
+    // 리덕스에서 넣어주는 값 - boardId, view, like
+    case "addBoard":
+      const newBoard = {
+        boardId: boardId,
+        userEmail: action.payload.userEmail,
+        title: action.payload.title,
+        content: action.payload.content,
+        view: 0,
+        like: 0,
+      };
+      boardId++;
+      return state.concat(newBoard);
+
+    // 조회수
+    case "updateView":
+      return state.map((item) =>
+        item.boardId == action.payload ? { ...item, view: item.view + 1 } : item
+      );
+
     default:
       return state;
   }
@@ -48,5 +71,9 @@ function board(state = initialState, action) {
 // 액션함수
 export const deleteBoard = (id) => ({ type: "deleteBoard", payload: id });
 export const modifyBoard = (board) => ({ type: "modifyBoard", payload: board });
+export const addBoard = (board) => ({ type: "addBoard", payload: board });
+export const updateView = (id) => ({ type: "updateView", payload: id });
 
 export default board;
+
+// 작성 날짜 추가하기

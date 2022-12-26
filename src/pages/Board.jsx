@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import {
   Paper,
   Table,
@@ -7,12 +8,14 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import MyButton from "../styles/MyButton";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 const Board = () => {
   const boardList = useSelector((state) => state.board);
+  // 글쓰기를 위해 로그인 여부를 가져옴
+  const user = useSelector((state) => state.currentUser);
   const navigate = useNavigate();
 
   // 게시물 이름을 클릭했을 때 실행될 함수
@@ -21,11 +24,19 @@ const Board = () => {
     navigate("/board/" + id);
   };
 
+  const toBoardAddPage = () => {
+    navigate("/board/writeform");
+  };
+
+  const toHome = () => {
+    navigate("/");
+  };
+
   return (
     <Wrap>
       <h2>Board</h2>
-      <TableContainer component={Paper} >
-        <Table sx={{ minWidth: 650 }} >
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }}>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
@@ -56,6 +67,16 @@ const Board = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <div>
+        <MyButton variant="contained" color="inherit" onClick={toHome}>
+          홈으로
+        </MyButton>
+        {user && (
+          <MyButton variant="contained" onClick={toBoardAddPage}>
+            글쓰기
+          </MyButton>
+        )}
+      </div>
     </Wrap>
   );
 };
@@ -68,8 +89,13 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-  background-color: #ccccd3;
-  // white-space: pre-wrap;
+  h2 {
+    margin-bottom: 1rem;
+  }
+  th,
+  td {
+    text-align: center;
+  }
   th {
     font-weight: bold;
   }
@@ -78,5 +104,12 @@ const Wrap = styled.div`
   }
   .board-title {
     cursor: pointer;
+  }
+  > div {
+    margin-top: 1rem;
+    margin-left: auto;
+    button {
+      margin-left: 1rem;
+    }
   }
 `;
