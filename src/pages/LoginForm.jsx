@@ -179,3 +179,5 @@ const Wrap = styled.div`
     color: #acafb1;
   }
 `;
+
+// paper 추가하기
